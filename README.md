@@ -4,7 +4,7 @@ I initially defined a few functions to be able 1) to get the first sub directori
 
 Also wrote a function (func = save_overlay_images()) to find, convert, and overlay the masks on top of the images for quality check. Saved the overlay images as .png format in 'output' folder. 
 
-![alt text](https://github.com/naeimbah/test_pipeline/blob/master/github/output/overlay_SC-HF-I-1_68.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/overlay_SC-HF-I-1_68.png)
 
 
 This function also returns three lists containing paths to the images, labels, and patient ids in order to use in the second phase for data training generator. 
