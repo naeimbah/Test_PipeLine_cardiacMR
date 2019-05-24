@@ -40,7 +40,7 @@ Alternatively, I could have shuffle the name of the .dcm files inside the genera
 
 At the end, I trained this Unet with a couple epochs with 12 steps per epoch wich is 96(number of 2D iamges)/8 (batch size) and I checked the logging files (in 'log' folder) to make sure the shuffling and patient ids are correctly insterted. 
 
-![alt text](https://github.com/naeimbah/test_pipeline/blob/master/github/output/Picture1.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Picture1.png)
 
 
 # packages 
