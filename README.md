@@ -58,7 +58,11 @@ updated save_overlay_images is available now.
 making sure that the outer contours are aligned with myocardium. 
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Picture_2.png)
 
-In src.utility I added  func mask_gen in order to create outer mask and its corresponding inner and ring (myocardium) mask. 
+In src.utility I added 
+
+    func mask_gen 
+    
+in order to create outer mask and its corresponding inner and ring (myocardium) mask. 
 
 # packages 
 
