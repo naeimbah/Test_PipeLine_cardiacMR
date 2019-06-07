@@ -113,26 +113,25 @@ def pat_lst_gen(dicom_dir,lookup_table):
     return dicom_sub_dirs_lst,contour_sub_dirs_lst
 
 
-def save_ovelay_iamges(contour_dir, dicom_dir,lookup_table):
+def save_ovelay_images(contour_dir, dicom_dir,lookup_table,contours):
     """save the images with overlay of the masks in png files
     :param dir: directories of contours and dicoms and list of directories with contour and dicom files
     :return: figure with overlay of mask on the image
                 also it returns list of labels, dicom images, and pateint ids that can be used for data storage and data generator
     """
 
-
     image_id_lst = []
     dicom_path_lst = []
     label_path_lst = []
 
     # getting list of sub directories with dicom and contour files that are corresponded
-    contour_sub_dirs_lst, dicom_sub_dirs_lst = pat_lst_gen(dicom_dir,lookup_table)
+    dicom_sub_dirs_lst,contour_sub_dirs_lst = pat_lst_gen(dicom_dir,lookup_table)
 
     for i in range(len(contour_sub_dirs_lst)):
 
         # getting the ith original_id contours
         # contour_dir = '/home/nabahrami/Documents/Naeim/PipeLine/Raw/final_data/contourfiles/'
-        contour_path = contour_dir + contour_sub_dirs_lst[i]+'/i-contours/'
+        contour_path = contour_dir + contour_sub_dirs_lst[i]+contours + '/'
 
 
         # getting the ith patient_id dicoms
@@ -165,8 +164,11 @@ def save_ovelay_iamges(contour_dir, dicom_dir,lookup_table):
 
                 plt.imshow(dcm_dict['pixel_data'],cmap = 'gray')
                 plt.imshow(mask,alpha = 0.2)
-                plt.savefig('/home/nabahrami/Documents/Naeim/PipeLine/output/overlay_{}_{}'.format(contour_sub_dirs_lst[i],slice_number))
+                plt.savefig('/home/nabahrami/Documents/Naeim/PipeLine/output/{}_overlay_{}_{}'.format(contours,contour_sub_dirs_lst[i],slice_number))
                 plt.show()
+                print(dicom_path)
+                print(dicom_path_number)
+                print(contour_name)
 
     return label_path_lst,dicom_path_lst,image_id_lst
 
