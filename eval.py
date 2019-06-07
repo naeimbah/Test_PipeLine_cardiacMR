@@ -2,7 +2,8 @@ import os
 import cv2
 import numpy as np
 import pandas as pd
-from src.utility import mask_gen,pat_lst_gen,i_mask_gen
+from src.utility import mask_gen,pat_lst_gen
+from src.morph import i_mask_gen
 import sklearn
 from sklearn.metrics import jaccard_similarity_score
 
