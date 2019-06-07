@@ -1,5 +1,6 @@
 
 import os
+import re
 import pydicom
 from pydicom.errors import InvalidDicomError
 import pandas as pd
@@ -176,3 +177,56 @@ def save_ovelay_images(contour_dir, dicom_dir,lookup_table,contours):
 # get list of labels, dicom images, and pateint ids
 
 # label_path_lst,dicom_path_lst,image_id_lst = save_ovelay_iamges(contour_dir, dicom_dir,lookup_table)
+
+def mask_gen(dicom_dir,contour_dir,dicom_lst, contour_lst):
+        """Generate three sets of masks: 1) the i contours 2) corresponding o contours and 3) the ring that indicates myocardium
+        :param dir: list of dicoms and their corresponding contours.
+        """
+        img = []
+        o_contour_out = []
+        i_contour_out = []
+        diff = []
+        for i in range(len(contour_lst)):
+
+            # getting the outer contour path
+            contour_path = contour_dir + contour_lst[i]+ '/o-contours/'
+
+            # getting the dicom path
+            dicom_path = dicom_dir + dicom_lst[i]
+
+            for _, _, fileList in os.walk(contour_path):
+                for contour_name in fileList:
+
+                    # read the outer contour
+                    coords_lst = parse_contour_file(os.path.join(contour_path , contour_name))
+
+                    # finding the slice number or .dcm file
+                    slice_number = contour_name_2_contour_number(contour_name)
+
+                    # read individual dicom
+                    dicom_path_number = dicom_path + '/' + str(slice_number)+ '.dcm'
+                    dcm_dict = parse_dicom_file(dicom_path_number)
+
+                    # converting contours into masks
+                    polygon = coords_lst
+                    width,height = dcm_dict['pixel_data'].shape
+                    mask_o = poly_to_mask(polygon, width, height)
+
+                    img.append(dcm_dict['pixel_data'])
+                    o_contour_out.append(mask_o)
+
+                    # find corresponding inner contour with the outer contour and create its mask
+                    contour_path_i = contour_dir + contour_lst[i]+ '/i-contours/'
+                    contour_name_i = re.sub(r'ocontour','icontour',contour_name)
+                    # print(contour_name_i)
+                    coords_lst_i = parse_contour_file(os.path.join(contour_path_i , contour_name_i))
+                    # converting contours into masks
+                    polygon_i = coords_lst_i
+                    mask_i = poly_to_mask(polygon_i, width, height)
+                    i_contour_out.append(mask_i)
+
+                    # create the difference between outer and inner contour
+                    # This indicates the ring or myocardium
+                    diff.append([np.subtract(mask_o.astype(np.float32),mask_i.astype(np.float32))])
+
+        return np.array(img),np.array(o_contour_out),np.array(i_contour_out), np.array(diff)[:,0,:,:]
