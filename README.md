@@ -168,7 +168,7 @@ Now I conduct a two step island removal to first get rid of islands inside blood
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_JSS.png)
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_Dice.png)
 
-code for this section is avaialbe at morph.py using openCV. 
+code for this section is avaialbe at src.morph.py using openCV. 
 
 
 
