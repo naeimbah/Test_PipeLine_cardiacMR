@@ -191,4 +191,5 @@ math,
 logging,
 cv2, 
 sklearn, 
+scipy
 
