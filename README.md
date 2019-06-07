@@ -97,6 +97,15 @@ There are many methods to do thresholding such as Simple Thresholding, Adaptive 
 
 # Otsu's Binarization 
 
+I use opencv to conduct Otsu's binarization to predict the blood pool from the outer contour using some thresholding mechanism. 
+Code for this purpose is in otsu.py 
+
+Then I overlay the predicted blood pool form otsu on top of outer contour to visualize the process:
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_outer.png)
+
+Also it seems like this prediction is a good fit on the blood pool:
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_bloodpool.png)
+
 
 # packages 
 
