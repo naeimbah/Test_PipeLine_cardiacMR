@@ -55,7 +55,8 @@ consistent pattern! For this specific task I would just put them aside and exclu
 
 updated save_overlay_images is available now. 
 
-
+making sure that the outer contours are aligned with myocardium. 
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Picture_2.png)
 
 # packages 
 
