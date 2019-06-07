@@ -132,10 +132,10 @@ It shows that for 37 contours both JSS and Dice had a reasonable scores. Althoug
  First, I need to denoise the image using a guassian filter.
  
  Second, get the gradients of the image, see below:
- ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/G.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/G.png)
 
 Third, removing the non max pixels. Ideally, the final image should have thin edges. Thus, I must perform non-maximum suppression to thin out the edges. see below:
- ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/supressed.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/supressed.png)
  
  Forth, now I need to conduct a through thresholding method such as double thresholding. 
  The double threshold step aims at identifying 3 kinds of pixels: strong, weak, and non-relevant:
@@ -143,7 +143,24 @@ Third, removing the non max pixels. Ideally, the final image should have thin ed
 - Strong pixels are pixels that have an intensity so high that we are sure they contribute to the final edge.
 - Weak pixels are pixels that have an intensity value that is not enough to be considered as strong ones, but yet not   small enough to be considered as non-relevant for the edge detection.
 - Other pixels are considered as non-relevant for the edge.
- ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/threshold.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/threshold.png)
+
+Fifth, Edge Tracking by Hysteresis:
+Based on the threshold results, the hysteresis consists of transforming weak pixels into strong ones, if and only if at least one of the pixels around the one being processed is a strong one.
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Hysteresis.png)
+
+Well, it seems like Hystersis didn't help that much. 
+
+Now I conduct a two step island removal to first get rid of islands inside blood pool, then removing the outer contour as much as possible. Then using erode and dilate I fill out the remaining edges to create a mask that represents blood pool. 
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/morph_close.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/morph_7.png)
+
+- Evaluation of this method is done using the same metrics as before and seems like my thresholding method worked slightly better. However, this morphological method was very rudimental and it could be more work done on how to greate the structure (SE) and other hyperparameters in the method. 
+
+
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_JSS.png)
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_Dice.png)
+
 
 
 # packages 
