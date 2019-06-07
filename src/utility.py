@@ -230,3 +230,9 @@ def mask_gen(dicom_dir,contour_dir,dicom_lst, contour_lst):
                     diff.append([np.subtract(mask_o.astype(np.float32),mask_i.astype(np.float32))])
 
         return np.array(img),np.array(o_contour_out),np.array(i_contour_out), np.array(diff)[:,0,:,:]
+
+##### blood pool and the ring gen
+def gen_vec(mask):
+   x,y = np.nonzero(mask)
+   vector = mask[x,y]
+   return vector
