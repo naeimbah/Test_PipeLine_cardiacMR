@@ -42,8 +42,9 @@ At the end, I trained this Unet with a couple epochs with 12 steps per epoch wic
 
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Picture1.png)
 
+
+
 # Phase 2
-# part 1 
 
 The visualized function was a little bit changed and now we have all the overlay of the contours on the image to be
 generalizable to i and o contours. Also, there was a bug in the function that I needed to fix.
@@ -98,7 +99,7 @@ There are many methods to do thresholding such as Simple Thresholding, Adaptive 
 # Otsu's Binarization 
 
 I use opencv to conduct Otsu's binarization to predict the blood pool from the outer contour using some thresholding mechanism. 
-Code for this purpose is in otsu.py 
+Code for this purpose is available in otsu.py 
 
 Then I overlay the predicted blood pool form otsu on top of outer contour to visualize the process:
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_outer.png)
