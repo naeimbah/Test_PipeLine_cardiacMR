@@ -121,6 +121,20 @@ It shows that for 37 contours both JSS and Dice had a reasonable scores. Althoug
 
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_thr.png)
 
+# Alternative approach -- morphology of the image 
+
+    # Canny Edge Detection
+ There are some steps for this edge detection method. 
+ hypothesis: I can detect the edges inside the outer heart mask that include the outer and inner contours and by removing the outer contour I might get a good contour of the blood pool. 
+ 
+ There are a few pre processing steps towards this method:
+ First, I need to denoise the image using a guassian filter.
+ Second, get the gradients of the image, see below:
+ 
+
+
+
+
 # packages 
 
 pandas,
