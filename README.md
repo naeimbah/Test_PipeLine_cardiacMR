@@ -42,6 +42,20 @@ At the end, I trained this Unet with a couple epochs with 12 steps per epoch wic
 
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Picture1.png)
 
+# Phase 2
+# part 1 
+
+The visualized function was a little bit changed and now we have all the overlay of the contours on the image to be
+generalizable to i and o contours. Also, there was a bug in the function that I needed to fix.
+During the quality check I realized that the o-contours for patient SCD0000501 seem to have a shift and they
+are out of place. The name of the contours and images were checked and they were matched. i-contours for this
+patient were drawn correctly too. I beleive there was shift in the o-contour masks.
+I tried some fliping, transposing, and rotating the masks vs the image but didn't see that much of a
+consistent pattern! For this specific task I would just put them aside and exclude from further analysis at this stage!
+
+updated save_overlay_images is available now. 
+
+
 
 # packages 
 
