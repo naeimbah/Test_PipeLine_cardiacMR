@@ -128,11 +128,22 @@ It shows that for 37 contours both JSS and Dice had a reasonable scores. Althoug
  hypothesis: I can detect the edges inside the outer heart mask that include the outer and inner contours and by removing the outer contour I might get a good contour of the blood pool. 
  
  There are a few pre processing steps towards this method:
- First, I need to denoise the image using a guassian filter.
- Second, get the gradients of the image, see below:
  
+ First, I need to denoise the image using a guassian filter.
+ 
+ Second, get the gradients of the image, see below:
+ ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/G.png)
 
+Third, removing the non max pixels. Ideally, the final image should have thin edges. Thus, I must perform non-maximum suppression to thin out the edges. see below:
+ ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/supressed.png)
+ 
+ Forth, now I need to conduct a through thresholding method such as double thresholding. 
+ The double threshold step aims at identifying 3 kinds of pixels: strong, weak, and non-relevant:
 
+- Strong pixels are pixels that have an intensity so high that we are sure they contribute to the final edge.
+- Weak pixels are pixels that have an intensity value that is not enough to be considered as strong ones, but yet not   small enough to be considered as non-relevant for the edge detection.
+- Other pixels are considered as non-relevant for the edge.
+ ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/threshold.png)
 
 
 # packages 
