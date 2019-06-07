@@ -93,6 +93,11 @@ Below are some histogram illustrations for 1) one single subject, 2) normalized 
 
 It seems that there are some valley in the histogram and A number of methods exist to find the valley between the two modal peaks in a histogram. I test a few here. 
 
+There are many methods to do thresholding such as Simple Thresholding, Adaptive Thresholding, and Otsu’s Binarization. Here I explore Otsu’s Binarization to investigate whether I can extract the blood pool from the outer contour. 
+
+# Otsu's Binarization 
+
+
 # packages 
 
 pandas,
