@@ -60,7 +60,7 @@ making sure that the outer contours are aligned with myocardium.
 
 In src.utility I added 
 
-    func mask_gen 
+    func = mask_gen 
     
 in order to create outer mask and its corresponding inner and ring (myocardium) mask. 
 
