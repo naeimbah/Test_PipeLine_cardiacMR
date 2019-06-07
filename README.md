@@ -75,6 +75,23 @@ Now I vectorize the masks that are generated in mask_gen to analysis their histo
 In src.utiliy!
 
 
+# Histogram analysis
+
+I generate histogram of the intensities for blood pool (inside i-contour) and myocardium (between i and o contour). 
+Below are some histogram illustrations for 1) one single subject, 2) normalized histogram of the subject, and 3) our population (using matplotlib)
+
+1) 
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/hist_test_1.png)
+
+
+2) 
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/hist_norm_1.png)
+
+
+3) 
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/hist_1.png)
+
+It seems that there are some valley in the histogram and A number of methods exist to find the valley between the two modal peaks in a histogram. I test a few here. 
 
 # packages 
 
