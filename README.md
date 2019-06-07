@@ -106,6 +106,19 @@ Then I overlay the predicted blood pool form otsu on top of outer contour to vis
 Also it seems like this prediction is a good fit on the blood pool:
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_bloodpool.png)
 
+# Evaluation
+
+There are so many ways to evaluate whether a segmentation is working well or not. Here after eyeballing and quality check I decided to render some numbers and metrics to see how quantitatively a thresholding can distinguish these regions from each other.
+Majorely I can look at:
+- Overlap rate (or Jaccard similarity measure). It is defined as the ratio of the intersection of segmented lesion area A and ground truth lesion area (or manually segmented areas) B to the union of segmented lesion area A and ground truth area B.
+- Under segmentation rate defines the proportion of the unsegmented lesion area U=|B-(A∩B)|.
+- Over segmentation rate is defined as the ratio of the segmented non-lesion area V=|A-(A∩B)| and the ground truth area B.
+
+Here I evaluated my segmentations using Jaccard Similarity Score (JSS) and Dice Coefficient and the code is avaiable in eval.py
+
+It shows that for 37 contours both JSS and Dice had a reasonable scores. Although for a couple of cases with small blood pool Dice coefficient is not great. see below:
+
+![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_thr.png)
 
 # packages 
 
