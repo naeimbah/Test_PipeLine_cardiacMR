@@ -28,6 +28,7 @@ depends on cpu and gpu power reading images from a single hdf5 might be a good i
 
 Then we need to batch the data to feed the neural network. I created a class for 'DataGenerator'. within the class defined a
 
+
     func = train_generator
     
 to recieve the data from hdf5 file and using the patient ids and batch size yeild the image and label numpy files. At the end of each epoch the patient ids will be suffled for randomizing the batch contains. 
