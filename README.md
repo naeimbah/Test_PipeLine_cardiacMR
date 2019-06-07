@@ -65,7 +65,16 @@ In src.utility I added
 in order to create outer mask and its corresponding inner and ring (myocardium) mask. 
 
 Let's take a look at a ring:
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ring.png)
+
+Now I vectorize the masks that are generated in mask_gen to analysis their histogram and for futher analysis:
+
+    func = gen_vec
+
+In src.utiliy!
+
+
 
 # packages 
 
