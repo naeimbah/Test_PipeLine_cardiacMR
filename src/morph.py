@@ -160,11 +160,13 @@ def i_mask_gen(outer_heart_mask):
     Hysteresis_1 = np.array(Hysteresis, dtype=np.uint8)
 
     # Bolding the edges
+    ''' optional 
     des = cv2.bitwise_not(Hysteresis_1)
     contour,hier = cv2.findContours(des,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contour:
         cv2.drawContours(des,[cnt],0,255,-1)
     gray = cv2.bitwise_not(des)
+    '''
 
     # two level island removal
     # removing inner islands
@@ -183,10 +185,9 @@ def i_mask_gen(outer_heart_mask):
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, se2)
     out = Hysteresis * (mask/256)
 
-    # filling the inner contour
-    outer_heart_vec = gen_vec(outer_heart_mask)
 
-    # kernel design
+    # kernel design to fill the inner contour
+    outer_heart_vec = gen_vec(outer_heart_mask)
     size_d = int(np.sqrt(len(outer_heart_vec)))
     size_e = int(1.1*size_d)
 
