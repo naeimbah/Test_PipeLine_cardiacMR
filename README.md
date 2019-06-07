@@ -147,6 +147,8 @@ Third, removing the non max pixels. Ideally, the final image should have thin ed
 - Strong pixels are pixels that have an intensity so high that we are sure they contribute to the final edge.
 - Weak pixels are pixels that have an intensity value that is not enough to be considered as strong ones, but yet not   small enough to be considered as non-relevant for the edge detection.
 - Other pixels are considered as non-relevant for the edge.
+
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/threshold.png)
 
 Fifth, Edge Tracking by Hysteresis:
