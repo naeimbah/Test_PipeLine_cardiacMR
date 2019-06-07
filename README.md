@@ -102,9 +102,11 @@ I use opencv to conduct Otsu's binarization to predict the blood pool from the o
 Code for this purpose is available in otsu.py 
 
 Then I overlay the predicted blood pool form otsu on top of outer contour to visualize the process:
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_outer.png)
 
 Also it seems like this prediction is a good fit on the blood pool:
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/ostu_on_bloodpool.png)
 
 # Evaluation
@@ -115,7 +117,7 @@ Majorely I can look at:
 - Under segmentation rate defines the proportion of the unsegmented lesion area U=|B-(A∩B)|.
 - Over segmentation rate is defined as the ratio of the segmented non-lesion area V=|A-(A∩B)| and the ground truth area B.
 
-Here I evaluated my segmentations using Jaccard Similarity Score (JSS) and Dice Coefficient and the code is avaiable in eval.py
+Here I evaluated my segmentations using Jaccard Similarity Score (JSS) and Dice Coefficient and the code is avaiable in eval.py using sklearn 
 
 It shows that for 37 contours both JSS and Dice had a reasonable scores. Although for a couple of cases with small blood pool Dice coefficient is not great. see below:
 
@@ -124,17 +126,19 @@ It shows that for 37 contours both JSS and Dice had a reasonable scores. Althoug
 # Alternative approach -- morphology of the image 
 
     # Canny Edge Detection
- There are some steps for this edge detection method. 
- hypothesis: I can detect the edges inside the outer heart mask that include the outer and inner contours and by removing the outer contour I might get a good contour of the blood pool. 
+There are some steps for this edge detection method. 
+hypothesis: I can detect the edges inside the outer heart mask that include the outer and inner contours and by removing the outer contour I might get a good contour of the blood pool. 
  
  There are a few pre processing steps towards this method:
  
  First, I need to denoise the image using a guassian filter.
  
  Second, get the gradients of the image, see below:
+ 
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/G.png)
 
 Third, removing the non max pixels. Ideally, the final image should have thin edges. Thus, I must perform non-maximum suppression to thin out the edges. see below:
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/supressed.png)
  
  Forth, now I need to conduct a through thresholding method such as double thresholding. 
@@ -147,11 +151,14 @@ Third, removing the non max pixels. Ideally, the final image should have thin ed
 
 Fifth, Edge Tracking by Hysteresis:
 Based on the threshold results, the hysteresis consists of transforming weak pixels into strong ones, if and only if at least one of the pixels around the one being processed is a strong one.
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/Hysteresis.png)
 
 Well, it seems like Hystersis didn't help that much. 
 
 Now I conduct a two step island removal to first get rid of islands inside blood pool, then removing the outer contour as much as possible. Then using erode and dilate I fill out the remaining edges to create a mask that represents blood pool. 
+
+
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/morph_close.png)
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/morph_7.png)
 
@@ -161,6 +168,16 @@ Now I conduct a two step island removal to first get rid of islands inside blood
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_JSS.png)
 ![alt text](https://github.com/naeimbah/Test_PipeLine_cardiacMR/blob/master/output/compare_all_Dice.png)
 
+code for this section is avaialbe at morph.py using openCV. 
+
+
+
+# Deep Learning vs Heuristic approaches 
+There are some deep learning options to create the contours on the blood pool from 2D U-net to 2D-GANS. Using some interpolation to get more contours for each patietns would help to increase the sample size. Also, training a model to map the outer contour to a inner contour could be insteresting. 
+
+However, any deep learning method need quit big sample size as opposed to conventional methods. But on the other hand, intensity thresholding or morphological approaches that were described above could be very subject dependent. For instance, I can imaging if there is a scar in myocardium then the morphology approach could easily fail or even the thresholding. Or if there is an artifact inside the blood pool it could be problematic for threshodling method. Segmenting top and bottom of the heart would be challenging due to small size of the interested organs and mapping the outer edge to the inner edge might be a good approach to tackle that problem. 
+
+Given that, if I can get my hands on a bigger sample size or augment a big data set using interpolations, I would rather a deep learning approach and I would use heuristic methods more in pre and post processing to polish the data unless I design a more sophesticated conventional method. 
 
 
 # packages 
@@ -172,3 +189,6 @@ PIL,
 pydicom or dicom ,
 math,
 logging,
+cv2, 
+sklearn, 
+
